@@ -1,0 +1,42 @@
+Even Swap
+
+//Answer
+
+You are given an array a and you need to generate an array b. You are allowed to apply only one type of operation on the array a, any number of times. In one operation you can swap ai, ai+1 if ai+ai+1 is even.
+Array b should be generated after applying the above operation any number of times on array a and array b should be lexicographically the largest among all arrays that can be generated from array a, after applying the above operation any number of times.
+
+Example 1:
+
+Input:
+N=3
+a[]={1,3,5}
+Output:
+5,3,1
+Explanation: [1,3,5],[1,5,3],[3,1,5],[3,5,1],
+[5,1,3] and [5,3,1] are all possible
+values of array b while the last one is 
+lexicographically largest.
+
+class Solution
+{
+    public:
+        vector <int> lexicographicallyLargest(vector <int> &a,int n)
+        {
+            // Code here
+            int i=0;
+            
+            while(i<n)
+            {
+                int j=i+1;
+                while(j<n and a[j]%2==a[j-1]%2)
+                {
+                    j++;
+                }
+                
+                sort(a.begin()+i, a.begin()+j, greater<int>());
+                i=j;
+            }
+            
+            return a;
+        }
+};
